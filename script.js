@@ -1,4 +1,3 @@
-//your code here
 const imageContainer = document.getElementById("image-container");
 const resetBtn = document.getElementById("reset");
 const verifyBtn = document.getElementById("verify");
@@ -14,17 +13,14 @@ function init() {
   resetBtn.style.display = "none";
   verifyBtn.style.display = "none";
 
-  // Pick one random image class to duplicate
   const randomDuplicate = baseClasses[Math.floor(Math.random() * baseClasses.length)];
   const tiles = [...baseClasses, randomDuplicate];
 
-  // Shuffle array using Fisher-Yates algorithm
   for (let i = tiles.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
   }
 
-  // Render 6 images
   tiles.forEach((cls) => {
     const img = document.createElement("img");
     img.classList.add(cls);
@@ -37,7 +33,6 @@ function init() {
 function handleTileClick(e) {
   const clickedImg = e.target;
 
-  // Prevent selecting the same image element twice
   if (selectedTiles.includes(clickedImg)) {
     return;
   }
@@ -45,12 +40,10 @@ function handleTileClick(e) {
   clickedImg.classList.add("selected");
   selectedTiles.push(clickedImg);
 
-  // State 2: At least one tile clicked -> show Reset
   if (selectedTiles.length >= 1) {
     resetBtn.style.display = "inline-block";
   }
 
-  // State 3: Exactly two tiles clicked -> show Verify; >2 -> hide Verify
   if (selectedTiles.length === 2) {
     verifyBtn.style.display = "inline-block";
   } else {
